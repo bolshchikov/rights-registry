@@ -1,5 +1,5 @@
 {
-  "name": "orbs-starter-kit",
+  "name": "rights-registry",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +16,8 @@
     "lint": "prettier --write 'src/**/*.js'",
     "gamma:start": "gamma-cli start-local",
     "gamma:stop": "gamma-cli stop-local",
-    "contract:deploy": "gamma-cli deploy ./contracts/counter.go -name counter -signer user1"
+    "deploy:auth": "gamma-cli deploy ./contracts/authority_records.go -name AuthorityRecords -signer user1",
+    "deploy:bibl": "gamma-cli deploy ./contracts/bibliographic_records.go -name BibliographicRecords -signer user1"
   },
   "eslintConfig": {
     "extends": "react-app"
