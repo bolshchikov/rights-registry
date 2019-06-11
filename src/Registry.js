@@ -11,7 +11,7 @@ const { publicKey, privateKey } = createAccount();
 const orbsClient = new Client('http://localhost:8080', 42, 'TEST_NET');
 
 export default ({ title, contractName }) => {
-  const [id, setId] = useState('');
+  const [currentId, setCurrentId] = useState('');
   const [currentFile, setCurrentFile] = useState('');
   const [receipt, setReceipt] = useState();
 
@@ -32,7 +32,7 @@ export default ({ title, contractName }) => {
   };
 
   const fileHandler = async file => {
-    setId(extractId(file));
+    setCurrentId(extractId(file));
     const content = await readFile(file);
     setCurrentFile(content);
   };
@@ -43,7 +43,7 @@ export default ({ title, contractName }) => {
       privateKey,
       contractName,
       'register',
-      [argString(currentFile)]
+      [argString(currentId), argString(currentFile)]
     );
     const receipt = await orbsClient.sendTransaction(tx);
     const txHash = encodeHex(receipt.txHash);
@@ -62,7 +62,7 @@ export default ({ title, contractName }) => {
     <>
       <h3>{title}</h3>
       <div>
-        <input readOnly type="text" placeholder="Document id" value={id} />
+        <input readOnly type="text" placeholder="Document id" value={currentId} />
       </div>
       <div>
         <input type="file" onChange={ev => fileHandler(ev.target.files[0])} />
@@ -71,30 +71,32 @@ export default ({ title, contractName }) => {
         <button onClick={registerFile}>Register</button>
       </div>
       {receipt && <table className="details">
-        <tr>
-          <td>Tx Hash:</td>
-          <td>{receipt.txHash}</td>
-        </tr>
-        <tr>
-          <td>Signed by:</td>
-          <td>{receipt.signer}</td>
-        </tr>
-        <tr>
-          <td>Timestamp:</td>
-          <td>
-            {new Date(receipt.timestamp * 1000).toLocaleString('en-gb', {
-              hour12: false,
-              timeZone: 'UTC',
-              timeZoneName: 'short',
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-              hour: 'numeric',
-              minute: 'numeric',
-              second: 'numeric'
-            })}
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>Tx Hash:</td>
+            <td>{receipt.txHash}</td>
+          </tr>
+          <tr>
+            <td>Signed by:</td>
+            <td>{receipt.signer}</td>
+          </tr>
+          <tr>
+            <td>Timestamp:</td>
+            <td>
+              {new Date(receipt.timestamp * 1000).toLocaleString('en-gb', {
+                hour12: false,
+                timeZone: 'UTC',
+                timeZoneName: 'short',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+              })}
+            </td>
+          </tr>
+        </tbody>
       </table>}
     </>
   );

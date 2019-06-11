@@ -10,14 +10,14 @@ function App() {
         <section>
           <Registry
             title="Bibliographic Records"
-            contractName="BibliographicRegistry"
+            contractName="BibliographicRecords"
           />
         </section>
         <hr />
         <section>
           <Registry
             title="Authority Records"
-            contractName="AuthorityRegistry"
+            contractName="AuthorityRecords"
           />
         </section>
       </article>
