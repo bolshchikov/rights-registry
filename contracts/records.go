@@ -47,6 +47,7 @@ func list() string {
 	return state.ReadString(LIST_KEY)
 }
 
-func get(id uint64) {
-
+func get(id string) string {
+	key := []byte(id)
+	return string(state.ReadBytes(key))
 }

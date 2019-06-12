@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import './Registry.css';
-import {
-  encodeHex,
-  argString
-} from 'orbs-client-sdk/dist/index.es';
+import { encodeHex, argString } from 'orbs-client-sdk/dist/index.es';
 
 export default ({ title, contractName, orbsClient, publicKey, privateKey }) => {
   const [currentId, setCurrentId] = useState('');
@@ -57,7 +54,12 @@ export default ({ title, contractName, orbsClient, publicKey, privateKey }) => {
     <>
       <h3>{title}</h3>
       <div>
-        <input readOnly type="text" placeholder="Document id" value={currentId} />
+        <input
+          readOnly
+          type="text"
+          placeholder="Document id"
+          value={currentId}
+        />
       </div>
       <div>
         <input type="file" onChange={ev => fileHandler(ev.target.files[0])} />
@@ -65,34 +67,36 @@ export default ({ title, contractName, orbsClient, publicKey, privateKey }) => {
       <div className="actions">
         <button onClick={registerFile}>Register</button>
       </div>
-      {receipt && <table className="details">
-        <tbody>
-          <tr>
-            <td>Tx Hash:</td>
-            <td>{receipt.txHash}</td>
-          </tr>
-          <tr>
-            <td>Signed by:</td>
-            <td>{receipt.signer}</td>
-          </tr>
-          <tr>
-            <td>Timestamp:</td>
-            <td>
-              {new Date(receipt.timestamp * 1000).toLocaleString('en-gb', {
-                hour12: false,
-                timeZone: 'UTC',
-                timeZoneName: 'short',
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric'
-              })}
-            </td>
-          </tr>
-        </tbody>
-      </table>}
+      {receipt && (
+        <table className="details">
+          <tbody>
+            <tr>
+              <td>Tx Hash:</td>
+              <td>{receipt.txHash}</td>
+            </tr>
+            <tr>
+              <td>Signed by:</td>
+              <td>{receipt.signer}</td>
+            </tr>
+            <tr>
+              <td>Timestamp:</td>
+              <td>
+                {new Date(receipt.timestamp * 1000).toLocaleString('en-gb', {
+                  hour12: false,
+                  timeZone: 'UTC',
+                  timeZoneName: 'short',
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  second: 'numeric'
+                })}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      )}
     </>
   );
 };

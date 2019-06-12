@@ -49,23 +49,11 @@ function App() {
           />
         </section>
         <section>
-          <Search 
-            publicKey={publicKey}
-            privateKey={privateKey}
-            orbsClient={orbsClient}
-            title="Bibliographic Records"
-            contractName="BibliographicRecords"
-          />
+          <Search title="Bibliographic Records" type="bibliographic" />
         </section>
         <hr />
-        <section>          
-          <Search 
-            publicKey={publicKey}
-            privateKey={privateKey}
-            orbsClient={orbsClient}
-            title="Authority Records"
-            contractName="AuthorityRecords"
-          />
+        <section>
+          <Search title="Authority Records" type="authority" />
         </section>
       </article>
     </>
