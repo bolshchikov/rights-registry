@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import './Registry.css';
 import {
   encodeHex,
-  argString,
-  Client,
-  createAccount
+  argString
 } from 'orbs-client-sdk/dist/index.es';
 
-const { publicKey, privateKey } = createAccount();
-const orbsClient = new Client('http://localhost:8080', 42, 'TEST_NET');
-
-export default ({ title, contractName }) => {
+export default ({ title, contractName, orbsClient, publicKey, privateKey }) => {
   const [currentId, setCurrentId] = useState('');
   const [currentFile, setCurrentFile] = useState('');
   const [receipt, setReceipt] = useState();

@@ -10,8 +10,10 @@ import (
 	"github.com/orbs-network/orbs-contract-sdk/go/sdk/v1/state"
 )
 
-var PUBLIC = sdk.Export(register, get)
+var PUBLIC = sdk.Export(register, get, list)
 var SYSTEM = sdk.Export(_init)
+
+var LIST_KEY = []byte("LIST")
 
 type Record struct {
 	Blob      string
@@ -36,7 +38,13 @@ func register(id string, record string) (timestamp uint64, signer []byte) {
 		Signer:    signer,
 	})
 	state.WriteBytes(key, encoded)
+	currentList := state.ReadString(LIST_KEY)
+	state.WriteString(LIST_KEY, currentList+","+id)
 	return
+}
+
+func list() string {
+	return state.ReadString(LIST_KEY)
 }
 
 func get(id uint64) {

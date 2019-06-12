@@ -6,8 +6,7 @@
 .content {
   display: grid;
   grid-template-columns: 10fr 0.5fr 10fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 1rem;
-  height: calc(100% - 130px);
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: ". ." ". .";
   box-sizing: border-box;
 }
